@@ -1,0 +1,46 @@
+$spacing-direction: top, bottom, left, right;
+$spacing-values: (
+  "null": 0,
+  "auto": auto,
+  "s": $spacing-s,
+  "m": $spacing-m,
+  "l": $spacing-l,
+);
+
+/* Margin */
+.margin {
+  @each $name, $value in $spacing-values {
+    &-#{$name} {
+      margin: $value !important;
+    }
+  }
+
+  @each $direction in $spacing-direction {
+    &-#{$direction} {
+      @each $name, $value in $spacing-values {
+        &-#{$name} {
+          margin-#{$direction}: $value !important;
+        }
+      }
+    }
+  }
+}
+
+/* Padding */
+.padding {
+  @each $name, $value in $spacing-values {
+    &-#{$name} {
+      padding: $value !important;
+    }
+  }
+
+  @each $direction in $spacing-direction {
+    &-#{$direction} {
+      @each $name, $value in $spacing-values {
+        &-#{$name} {
+          padding-#{$direction}: $value !important;
+        }
+      }
+    }
+  }
+}

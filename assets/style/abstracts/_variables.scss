@@ -12,6 +12,15 @@ $breakpoint-large: 1180px;
 $font-weight-regular: 400;
 $font-weight-bold: 700;
 
+/* === Border radius === */
+$border-radius-s: 4px;
+$border-radius-m: 8px;
+
 /* === Font families === */
 $font-family-title: "Raleway", sans-serif;
 $font-family-body: "Roboto", sans-serif;
+
+/* === Spacing === */
+$spacing-s: 1rem; // 16px
+$spacing-m: 1.5rem; // 24px
+$spacing-l: 3rem; // 48px

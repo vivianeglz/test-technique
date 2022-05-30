@@ -1,0 +1,13 @@
+.users-list {
+  margin: -0.5rem;
+
+  @include media(small) {
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+  &__item {
+    margin: 0.5rem;
+    flex: 1 1 calc(100% / calc(12 / 3) - 0.5rem);
+  }
+}
