@@ -3,6 +3,7 @@
     <p v-if="loading">Chargement en cours...</p>
     <div v-else>
       <p v-if="errorMessage">{{ errorMessage }}</p>
+      <segment-users-filters :query="query" class="margin-bottom-s" @filter="query => $emit('filter', query)" />
       <pagination-list
         :page="page"
         :total-pages="totalPages"
@@ -17,12 +18,14 @@
 <script>
 import PaginationList from "@/components/globals/pagination-list";
 import SegmentUsersList from "@/components/segments/users/SegmentUsersList";
+import SegmentUsersFilters from "@/components/segments/users/SementUsersFilters";
 
 export default {
   name: "PageUsers",
   components: {
     PaginationList,
     SegmentUsersList,
+    SegmentUsersFilters,
   },
   props: {
     users: {
@@ -44,6 +47,10 @@ export default {
     totalPages: {
       type: Number,
       default: 0,
+    },
+    query: {
+      type: Object,
+      required: true,
     },
   },
 };

@@ -1,0 +1,12 @@
+.input-container {
+  &__label {
+    display: block;
+  }
+
+  &__input {
+    width: 100%;
+    background-color: $color-neutral-00;
+    border: 1px solid $color-neutral-50;
+    border-radius: $border-radius-s;
+  }
+}

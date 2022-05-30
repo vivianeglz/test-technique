@@ -2,10 +2,12 @@
   <page-users
     :loading="loading"
     :error-message="errorMessage"
-    :users="users"
+    :users="filteredUsers"
     :page="page"
     :total-pages="totalPages"
+    :query="query"
     @change-page="onChangePage"
+    @filter="onFilter"
   />
 </template>
 
@@ -23,6 +25,7 @@ export default {
       errorMessage: null,
       loading: true,
       page: 1,
+      query: {},
     };
   },
   computed: {
@@ -30,6 +33,15 @@ export default {
       users: "users/users",
       totalPages: "users/totalPages",
     }),
+    filteredUsers() {
+      return this.query.searchString
+        ? this.users.filter(
+            user =>
+              user.first_name?.toLowerCase()?.includes(this.query.searchString.toLowerCase()) ||
+              user.last_name?.toLowerCase()?.includes(this.query.searchString.toLowerCase())
+          )
+        : this.users;
+    },
   },
   created() {
     this.getUsers();
@@ -41,6 +53,9 @@ export default {
     onChangePage(page) {
       this.page = page;
       this.getUsers();
+    },
+    onFilter(query) {
+      this.query = query;
     },
     getUsers() {
       this.loading = true;
