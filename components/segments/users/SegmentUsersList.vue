@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import UserCard from "@/components/globals/users/UserCard";
+import UserCard from "@/components/globals/cards/UserCard";
 
 export default {
   name: "SegmentUsersList",

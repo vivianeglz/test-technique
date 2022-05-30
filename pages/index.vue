@@ -1,5 +1,12 @@
 <template>
-  <page-users :loading="loading" :error-message="errorMessage" :users="users" />
+  <page-users
+    :loading="loading"
+    :error-message="errorMessage"
+    :users="users"
+    :page="page"
+    :total-pages="totalPages"
+    @change-page="onChangePage"
+  />
 </template>
 
 <script>
@@ -15,27 +22,36 @@ export default {
     return {
       errorMessage: null,
       loading: true,
+      page: 1,
     };
   },
   computed: {
     ...mapGetters({
       users: "users/users",
+      totalPages: "users/totalPages",
     }),
   },
   created() {
-    this.loading = true;
-    this.fetchUsers()
-      .catch(() => {
-        this.errorMessage = "Une erreur est survenue lors de la récupération des utilisateurs.";
-      })
-      .finally(() => {
-        this.loading = false;
-      });
+    this.getUsers();
   },
   methods: {
     ...mapActions({
       fetchUsers: "users/fetchUsers",
     }),
+    onChangePage(page) {
+      this.page = page;
+      this.getUsers();
+    },
+    getUsers() {
+      this.loading = true;
+      this.fetchUsers({ page: this.page })
+        .catch(() => {
+          this.errorMessage = "Une erreur est survenue lors de la récupération des utilisateurs.";
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+    },
   },
 };
 </script>
